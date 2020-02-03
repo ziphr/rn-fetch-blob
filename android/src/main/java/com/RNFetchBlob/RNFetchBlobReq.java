@@ -590,9 +590,11 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
                 } catch (Exception ignored) {
 //                    ignored.printStackTrace();
                 }
-
+                
+                RNFetchBlobFileResp rnFetchBlobFileResp;
+                
                 try {
-                    RNFetchBlobFileResp rnFetchBlobFileResp = (RNFetchBlobFileResp) responseBody;
+                    rnFetchBlobFileResp = (RNFetchBlobFileResp) responseBody;
                 } catch (ClassCastException ex) {
                     // unexpected response type
                     if (responseBody != null) {
