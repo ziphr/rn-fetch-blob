@@ -739,6 +739,7 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
+            try{
             Context appCtx = RNFetchBlob.RCTContext.getApplicationContext();
             long id = intent.getExtras().getLong(DownloadManager.EXTRA_DOWNLOAD_ID);
             if (id == this.downloadManagerId) {
@@ -806,8 +807,7 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
                             this.callback.invoke(null, RNFetchBlobConst.RNFB_RESPONSE_PATH, customDest);
 
                     } catch(Exception ex) {
-                        ex.printStackTrace();
-                        this.callback.invoke(ex.getLocalizedMessage(), null);
+                       return; 
                     }
                 }
                 else {
@@ -818,6 +818,9 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
                 }
 
             }
+            } catch (Exception exc) {
+                return;
+            } 
         }
     }
 
